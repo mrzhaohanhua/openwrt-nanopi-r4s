@@ -5,11 +5,13 @@ clear
 echo "清理 ./openwrt/"
 rm -rf openwrt
 
-version_code="v22.03.0"
+openwrt_version_code="v22.03.0"
+lede_tag_code="20221001"
+
 extra_package_path="./package/extra/"
 
 ### 获取openwrt ###
-git clone --depth 1 -b $version_code https://github.com/openwrt/openwrt openwrt
+git clone --depth 1 -b $openwrt_version_code https://github.com/openwrt/openwrt openwrt
 
 #切换到openwrt目录
 cd openwrt
@@ -24,17 +26,18 @@ cd openwrt
 # 删除原target文件
 rm -rf ./target/linux/rockchip
 # 下载lede的target文件
-svn export https://github.com/coolsnowwolf/lede/trunk/target/linux/rockchip target/linux/rockchip
+svn export https://github.com/coolsnowwolf/lede/tags/$lede_tag_code/target/linux/rockchip target/linux/rockchip
 # 删除lede里的Makefile
 rm -rf ./target/linux/rockchip/Makefile
 # 使用原openwrt中的Makefile
-wget -P target/linux/rockchip/ https://github.com/openwrt/openwrt/raw/$version_code/target/linux/rockchip/Makefile
-# 删除openwrt使用5.10内核, 删除没有用到的PATCH
+wget -P target/linux/rockchip/ https://github.com/openwrt/openwrt/raw/$openwrt_version_code/target/linux/rockchip/Makefile
+# openwrt使用5.10内核, 删除没有用到的PATCH
 rm -rf ./target/linux/rockchip/patches-5.4
 rm -rf ./target/linux/rockchip/patches-5.15
 rm -rf ./target/linux/rockchip/patches-5.19
 rm -rf ./target/linux/rockchip/files-5.19
 rm -rf ./target/linux/rockchip/files-5.15
+rm ./target/linux/rockchip/modules.mk
 # patches-5.10中002和003patch会编译失败, 在此删除
 rm -rf ./target/linux/rockchip/patches-5.10/002-net-usb-r8152-add-LED-configuration-from-OF.patch 
 rm -rf ./target/linux/rockchip/patches-5.10/003-dt-bindings-net-add-RTL8152-binding-documentation.patch
@@ -44,10 +47,10 @@ cp -rf ../PATCH/dts/* ./target/linux/rockchip/files/arch/arm64/boot/dts/rockchip
 # 删除原uboot
 rm -rf ./package/boot/uboot-rockchip
 # 使用lede的uboot
-svn export https://github.com/coolsnowwolf/lede/trunk/package/boot/uboot-rockchip package/boot/uboot-rockchip
+svn export https://github.com/coolsnowwolf/lede/tags/$lede_tag_code/package/boot/uboot-rockchip package/boot/uboot-rockchip
 sed -i '/r2c-rk3328:arm-trusted/d' package/boot/uboot-rockchip/Makefile
 
-svn export https://github.com/coolsnowwolf/lede/trunk/package/boot/arm-trusted-firmware-rockchip-vendor package/boot/arm-trusted-firmware-rockchip-vendor
+svn export https://github.com/coolsnowwolf/lede/tags/$lede_tag_code/package/boot/arm-trusted-firmware-rockchip-vendor package/boot/arm-trusted-firmware-rockchip-vendor
 
 rm -rf ./package/kernel/linux/modules/video.mk
 wget -P package/kernel/linux/modules/ https://github.com/immortalwrt/immortalwrt/raw/master/package/kernel/linux/modules/video.mk

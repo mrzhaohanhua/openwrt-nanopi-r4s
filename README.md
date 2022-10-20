@@ -1,6 +1,6 @@
-# openwrt-r4s
+# openwrt for nanopi r4s
 
-基于OpenWrt官方v22.03.0代码
+基于OpenWrt官方代码
 
 参考和使用了QiuSimons的代码，https://github.com/QiuSimons/YAOF
 
@@ -9,7 +9,7 @@
 QiuSimons对R4S进行了超频，这里没有采用，以降低对电源的要求，可以使用低功率的USB电源供电。
 
 ```BASH
-git clone https://github.com/mrzhaohanhua/openwrt-r4s
+git clone https://github.com/mrzhaohanhua/openwrt-nanopi-r4s
 cd openwrt-r4s
 sh run.sh
 cd openwrt
