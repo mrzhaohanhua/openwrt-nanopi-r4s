@@ -173,6 +173,12 @@ done
 # Script for creating ACL file for each LuCI APP
 bash ../create_acl_for_luci.sh -a
 
+# Install scripts
+mkdir -p openwrt/package/base-files/files/bin/
+cp files/bin/pppoe_daemon.sh openwrt/package/base-files/files/bin/
+sed -i "`wc -l < openwrt/package/base-files/files/etc/rc.local`i\\sh /bin/pppoe_daemon.sh &\\" openwrt/package/base-files/files/etc/rc.local
+
+# Copy config file
 cp ../r4s_config .config
 make defconfig
 echo "ready to make!!!"
