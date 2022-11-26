@@ -2481,7 +2481,7 @@ CONFIG_PACKAGE_kmod-slhc=y
 # CONFIG_PACKAGE_kmod-tcp-hybla is not set
 # CONFIG_PACKAGE_kmod-tcp-scalable is not set
 # CONFIG_PACKAGE_kmod-trelay is not set
-# CONFIG_PACKAGE_kmod-tun is not set
+CONFIG_PACKAGE_kmod-tun=y
 CONFIG_PACKAGE_kmod-udptunnel4=y
 CONFIG_PACKAGE_kmod-udptunnel6=y
 # CONFIG_PACKAGE_kmod-veth is not set
@@ -4143,7 +4143,7 @@ CONFIG_PACKAGE_libgmp=y
 # CONFIG_PACKAGE_libhamlib is not set
 CONFIG_PACKAGE_libhavege=y
 # CONFIG_PACKAGE_libhiredis is not set
-# CONFIG_PACKAGE_libhttp-parser is not set
+CONFIG_PACKAGE_libhttp-parser=y
 # CONFIG_PACKAGE_libhwloc is not set
 # CONFIG_PACKAGE_libi2c is not set
 # CONFIG_PACKAGE_libical is not set
@@ -4270,7 +4270,7 @@ CONFIG_PACKAGE_libpcre=y
 # CONFIG_PACKAGE_libpng is not set
 CONFIG_PACKAGE_libpopt=y
 # CONFIG_PACKAGE_libpri is not set
-# CONFIG_PACKAGE_libprotobuf-c is not set
+CONFIG_PACKAGE_libprotobuf-c=y
 # CONFIG_PACKAGE_libpsl is not set
 # CONFIG_PACKAGE_libqmi is not set
 # CONFIG_PACKAGE_libqrencode is not set
@@ -4387,7 +4387,7 @@ CONFIG_PACKAGE_libwebsockets-full=y
 # CONFIG_PACKAGE_libwrap is not set
 # CONFIG_PACKAGE_libxerces-c is not set
 # CONFIG_PACKAGE_libxerces-c-samples is not set
-# CONFIG_PACKAGE_libxml2 is not set
+CONFIG_PACKAGE_libxml2=y
 # CONFIG_PACKAGE_libxslt is not set
 # CONFIG_PACKAGE_libyaml-cpp is not set
 # CONFIG_PACKAGE_libyang is not set
@@ -4564,13 +4564,13 @@ CONFIG_PACKAGE_luci-app-frps=y
 # CONFIG_PACKAGE_luci-app-nlbwmon is not set
 # CONFIG_PACKAGE_luci-app-ntpc is not set
 # CONFIG_PACKAGE_luci-app-nut is not set
-# CONFIG_PACKAGE_luci-app-ocserv is not set
+CONFIG_PACKAGE_luci-app-ocserv=y
 # CONFIG_PACKAGE_luci-app-oled is not set
 # CONFIG_PACKAGE_luci-app-olsr is not set
 # CONFIG_PACKAGE_luci-app-olsr-services is not set
 # CONFIG_PACKAGE_luci-app-olsr-viz is not set
 # CONFIG_PACKAGE_luci-app-omcproxy is not set
-CONFIG_PACKAGE_luci-app-openvpn=y
+# CONFIG_PACKAGE_luci-app-openvpn is not set
 # CONFIG_PACKAGE_luci-app-openwisp is not set
 CONFIG_PACKAGE_luci-app-opkg=y
 # CONFIG_PACKAGE_luci-app-p910nd is not set
@@ -4602,7 +4602,7 @@ CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Xray=y
 # end of Configuration
 
 # CONFIG_PACKAGE_luci-app-polipo is not set
-CONFIG_PACKAGE_luci-app-privoxy=y
+# CONFIG_PACKAGE_luci-app-privoxy is not set
 # CONFIG_PACKAGE_luci-app-qos is not set
 # CONFIG_PACKAGE_luci-app-radicale is not set
 # CONFIG_PACKAGE_luci-app-radicale2 is not set
@@ -4662,7 +4662,7 @@ CONFIG_PACKAGE_luci-theme-openwrt-2020=y
 CONFIG_PACKAGE_luci-proto-ipv6=y
 # CONFIG_PACKAGE_luci-proto-modemmanager is not set
 # CONFIG_PACKAGE_luci-proto-ncm is not set
-# CONFIG_PACKAGE_luci-proto-openconnect is not set
+CONFIG_PACKAGE_luci-proto-openconnect=y
 # CONFIG_PACKAGE_luci-proto-openfortivpn is not set
 CONFIG_PACKAGE_luci-proto-ppp=y
 # CONFIG_PACKAGE_luci-proto-pppossh is not set
@@ -4671,7 +4671,7 @@ CONFIG_PACKAGE_luci-proto-ppp=y
 # CONFIG_PACKAGE_luci-proto-sstp is not set
 # CONFIG_PACKAGE_luci-proto-vpnc is not set
 # CONFIG_PACKAGE_luci-proto-vxlan is not set
-CONFIG_PACKAGE_luci-proto-wireguard=y
+# CONFIG_PACKAGE_luci-proto-wireguard is not set
 # end of 5. Protocols
 
 #
@@ -4898,39 +4898,39 @@ CONFIG_PACKAGE_luci-i18n-frps-en=y
 # CONFIG_PACKAGE_luci-i18n-frps-vi is not set
 CONFIG_PACKAGE_luci-i18n-frps-zh-cn=y
 # CONFIG_PACKAGE_luci-i18n-frps-zh-tw is not set
-# CONFIG_PACKAGE_luci-i18n-openvpn-ar is not set
-# CONFIG_PACKAGE_luci-i18n-openvpn-bg is not set
-# CONFIG_PACKAGE_luci-i18n-openvpn-bn is not set
-# CONFIG_PACKAGE_luci-i18n-openvpn-ca is not set
-# CONFIG_PACKAGE_luci-i18n-openvpn-cs is not set
-# CONFIG_PACKAGE_luci-i18n-openvpn-da is not set
-# CONFIG_PACKAGE_luci-i18n-openvpn-de is not set
-# CONFIG_PACKAGE_luci-i18n-openvpn-el is not set
-CONFIG_PACKAGE_luci-i18n-openvpn-en=y
-# CONFIG_PACKAGE_luci-i18n-openvpn-es is not set
-# CONFIG_PACKAGE_luci-i18n-openvpn-fi is not set
-# CONFIG_PACKAGE_luci-i18n-openvpn-fr is not set
-# CONFIG_PACKAGE_luci-i18n-openvpn-he is not set
-# CONFIG_PACKAGE_luci-i18n-openvpn-hi is not set
-# CONFIG_PACKAGE_luci-i18n-openvpn-hu is not set
-# CONFIG_PACKAGE_luci-i18n-openvpn-it is not set
-# CONFIG_PACKAGE_luci-i18n-openvpn-ja is not set
-# CONFIG_PACKAGE_luci-i18n-openvpn-ko is not set
-# CONFIG_PACKAGE_luci-i18n-openvpn-mr is not set
-# CONFIG_PACKAGE_luci-i18n-openvpn-ms is not set
-# CONFIG_PACKAGE_luci-i18n-openvpn-no is not set
-# CONFIG_PACKAGE_luci-i18n-openvpn-pl is not set
-# CONFIG_PACKAGE_luci-i18n-openvpn-pt is not set
-# CONFIG_PACKAGE_luci-i18n-openvpn-pt-br is not set
-# CONFIG_PACKAGE_luci-i18n-openvpn-ro is not set
-# CONFIG_PACKAGE_luci-i18n-openvpn-ru is not set
-# CONFIG_PACKAGE_luci-i18n-openvpn-sk is not set
-# CONFIG_PACKAGE_luci-i18n-openvpn-sv is not set
-# CONFIG_PACKAGE_luci-i18n-openvpn-tr is not set
-# CONFIG_PACKAGE_luci-i18n-openvpn-uk is not set
-# CONFIG_PACKAGE_luci-i18n-openvpn-vi is not set
-CONFIG_PACKAGE_luci-i18n-openvpn-zh-cn=y
-# CONFIG_PACKAGE_luci-i18n-openvpn-zh-tw is not set
+# CONFIG_PACKAGE_luci-i18n-ocserv-ar is not set
+# CONFIG_PACKAGE_luci-i18n-ocserv-bg is not set
+# CONFIG_PACKAGE_luci-i18n-ocserv-bn is not set
+# CONFIG_PACKAGE_luci-i18n-ocserv-ca is not set
+# CONFIG_PACKAGE_luci-i18n-ocserv-cs is not set
+# CONFIG_PACKAGE_luci-i18n-ocserv-da is not set
+# CONFIG_PACKAGE_luci-i18n-ocserv-de is not set
+# CONFIG_PACKAGE_luci-i18n-ocserv-el is not set
+CONFIG_PACKAGE_luci-i18n-ocserv-en=y
+# CONFIG_PACKAGE_luci-i18n-ocserv-es is not set
+# CONFIG_PACKAGE_luci-i18n-ocserv-fi is not set
+# CONFIG_PACKAGE_luci-i18n-ocserv-fr is not set
+# CONFIG_PACKAGE_luci-i18n-ocserv-he is not set
+# CONFIG_PACKAGE_luci-i18n-ocserv-hi is not set
+# CONFIG_PACKAGE_luci-i18n-ocserv-hu is not set
+# CONFIG_PACKAGE_luci-i18n-ocserv-it is not set
+# CONFIG_PACKAGE_luci-i18n-ocserv-ja is not set
+# CONFIG_PACKAGE_luci-i18n-ocserv-ko is not set
+# CONFIG_PACKAGE_luci-i18n-ocserv-mr is not set
+# CONFIG_PACKAGE_luci-i18n-ocserv-ms is not set
+# CONFIG_PACKAGE_luci-i18n-ocserv-no is not set
+# CONFIG_PACKAGE_luci-i18n-ocserv-pl is not set
+# CONFIG_PACKAGE_luci-i18n-ocserv-pt is not set
+# CONFIG_PACKAGE_luci-i18n-ocserv-pt-br is not set
+# CONFIG_PACKAGE_luci-i18n-ocserv-ro is not set
+# CONFIG_PACKAGE_luci-i18n-ocserv-ru is not set
+# CONFIG_PACKAGE_luci-i18n-ocserv-sk is not set
+# CONFIG_PACKAGE_luci-i18n-ocserv-sv is not set
+# CONFIG_PACKAGE_luci-i18n-ocserv-tr is not set
+# CONFIG_PACKAGE_luci-i18n-ocserv-uk is not set
+# CONFIG_PACKAGE_luci-i18n-ocserv-vi is not set
+CONFIG_PACKAGE_luci-i18n-ocserv-zh-cn=y
+# CONFIG_PACKAGE_luci-i18n-ocserv-zh-tw is not set
 # CONFIG_PACKAGE_luci-i18n-opkg-ar is not set
 # CONFIG_PACKAGE_luci-i18n-opkg-bg is not set
 # CONFIG_PACKAGE_luci-i18n-opkg-bn is not set
@@ -4965,39 +4965,6 @@ CONFIG_PACKAGE_luci-i18n-opkg-en=y
 CONFIG_PACKAGE_luci-i18n-opkg-zh-cn=y
 # CONFIG_PACKAGE_luci-i18n-opkg-zh-tw is not set
 CONFIG_PACKAGE_luci-i18n-passwall-zh-cn=y
-# CONFIG_PACKAGE_luci-i18n-privoxy-ar is not set
-# CONFIG_PACKAGE_luci-i18n-privoxy-bg is not set
-# CONFIG_PACKAGE_luci-i18n-privoxy-bn is not set
-# CONFIG_PACKAGE_luci-i18n-privoxy-ca is not set
-# CONFIG_PACKAGE_luci-i18n-privoxy-cs is not set
-# CONFIG_PACKAGE_luci-i18n-privoxy-da is not set
-# CONFIG_PACKAGE_luci-i18n-privoxy-de is not set
-# CONFIG_PACKAGE_luci-i18n-privoxy-el is not set
-CONFIG_PACKAGE_luci-i18n-privoxy-en=y
-# CONFIG_PACKAGE_luci-i18n-privoxy-es is not set
-# CONFIG_PACKAGE_luci-i18n-privoxy-fi is not set
-# CONFIG_PACKAGE_luci-i18n-privoxy-fr is not set
-# CONFIG_PACKAGE_luci-i18n-privoxy-he is not set
-# CONFIG_PACKAGE_luci-i18n-privoxy-hi is not set
-# CONFIG_PACKAGE_luci-i18n-privoxy-hu is not set
-# CONFIG_PACKAGE_luci-i18n-privoxy-it is not set
-# CONFIG_PACKAGE_luci-i18n-privoxy-ja is not set
-# CONFIG_PACKAGE_luci-i18n-privoxy-ko is not set
-# CONFIG_PACKAGE_luci-i18n-privoxy-mr is not set
-# CONFIG_PACKAGE_luci-i18n-privoxy-ms is not set
-# CONFIG_PACKAGE_luci-i18n-privoxy-no is not set
-# CONFIG_PACKAGE_luci-i18n-privoxy-pl is not set
-# CONFIG_PACKAGE_luci-i18n-privoxy-pt is not set
-# CONFIG_PACKAGE_luci-i18n-privoxy-pt-br is not set
-# CONFIG_PACKAGE_luci-i18n-privoxy-ro is not set
-# CONFIG_PACKAGE_luci-i18n-privoxy-ru is not set
-# CONFIG_PACKAGE_luci-i18n-privoxy-sk is not set
-# CONFIG_PACKAGE_luci-i18n-privoxy-sv is not set
-# CONFIG_PACKAGE_luci-i18n-privoxy-tr is not set
-# CONFIG_PACKAGE_luci-i18n-privoxy-uk is not set
-# CONFIG_PACKAGE_luci-i18n-privoxy-vi is not set
-CONFIG_PACKAGE_luci-i18n-privoxy-zh-cn=y
-# CONFIG_PACKAGE_luci-i18n-privoxy-zh-tw is not set
 # CONFIG_PACKAGE_luci-i18n-samba4-ar is not set
 # CONFIG_PACKAGE_luci-i18n-samba4-bg is not set
 # CONFIG_PACKAGE_luci-i18n-samba4-bn is not set
@@ -5778,8 +5745,28 @@ CONFIG_PACKAGE_ntpclient=y
 # CONFIG_PACKAGE_eoip is not set
 # CONFIG_PACKAGE_fastd is not set
 # CONFIG_PACKAGE_libreswan is not set
-# CONFIG_PACKAGE_ocserv is not set
-# CONFIG_PACKAGE_openconnect is not set
+CONFIG_PACKAGE_ocserv=y
+
+#
+# Configuration
+#
+# CONFIG_OCSERV_PAM is not set
+# CONFIG_OCSERV_SECCOMP is not set
+# CONFIG_OCSERV_RADIUS is not set
+CONFIG_OCSERV_PROTOBUF=y
+CONFIG_OCSERV_HTTP_PARSER=y
+# end of Configuration
+
+CONFIG_PACKAGE_openconnect=y
+
+#
+# Configuration
+#
+CONFIG_OPENCONNECT_GNUTLS=y
+# CONFIG_OPENCONNECT_OPENSSL is not set
+# CONFIG_OPENCONNECT_STOKEN is not set
+# end of Configuration
+
 # CONFIG_PACKAGE_openfortivpn is not set
 # CONFIG_PACKAGE_openvpn-easy-rsa is not set
 # CONFIG_PACKAGE_openvpn-mbedtls is not set
@@ -5803,7 +5790,7 @@ CONFIG_PACKAGE_ntpclient=y
 # CONFIG_PACKAGE_uanytun-nocrypt is not set
 # CONFIG_PACKAGE_uanytun-sslcrypt is not set
 # CONFIG_PACKAGE_vpnc is not set
-# CONFIG_PACKAGE_vpnc-scripts is not set
+CONFIG_PACKAGE_vpnc-scripts=y
 CONFIG_PACKAGE_wireguard-tools=y
 # CONFIG_PACKAGE_xl2tpd is not set
 # CONFIG_PACKAGE_zerotier is not set
@@ -6436,7 +6423,7 @@ CONFIG_PACKAGE_partx-utils=y
 # Encryption
 #
 # CONFIG_PACKAGE_ccrypt is not set
-# CONFIG_PACKAGE_certtool is not set
+CONFIG_PACKAGE_certtool=y
 # CONFIG_PACKAGE_cryptsetup is not set
 # CONFIG_PACKAGE_cryptsetup-ssh is not set
 # CONFIG_PACKAGE_gnupg is not set
