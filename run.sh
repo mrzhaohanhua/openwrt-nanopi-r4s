@@ -174,9 +174,9 @@ done
 bash ../create_acl_for_luci.sh -a
 
 # Install scripts
-mkdir -p openwrt/package/base-files/files/bin/
-cp files/bin/pppoe_daemon.sh openwrt/package/base-files/files/bin/
-sed -i "`wc -l < openwrt/package/base-files/files/etc/rc.local`i\\sh /bin/pppoe_daemon.sh &\\" openwrt/package/base-files/files/etc/rc.local
+mkdir -p package/base-files/files/bin/
+cp ../files/bin/pppoe_daemon.sh package/base-files/files/bin/
+sed -i "`wc -l < package/base-files/files/etc/rc.local`i\\sh /bin/pppoe_daemon.sh &\\" package/base-files/files/etc/rc.local
 
 # Copy config file
 cp ../r4s_config .config
