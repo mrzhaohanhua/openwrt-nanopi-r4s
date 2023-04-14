@@ -108,6 +108,9 @@ svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/hysteria ${extr
 svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/v2ray-core ${extra_package_path}/v2ray-core
 svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/v2ray-geodata ${extra_package_path}/v2ray-geodata
 
+# luci-app-xray
+svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/luci-app-xray ${extra_package_path}/luci-app-xray
+
 # KMS 激活助手
 svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/luci-app-vlmcsd ${extra_package_path}/luci-app-vlmcsd
 svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/vlmcsd ${extra_package_path}/vlmcsd
