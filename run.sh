@@ -65,7 +65,7 @@ svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/tools/upx tools
 
 # 更换smartdns
 rm -rf feeds/packages/net/smartdns
-svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/smartdns/ feeds/packages/net/smartdns
+svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/openwrt-smartdns/ feeds/packages/net/smartdns
 
 # 替换luci-app-smartdns
 rm -rf feeds/luci/applications/luci-app-smartdns
@@ -101,7 +101,7 @@ svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/trojan-go ${ext
 svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/brook ${extra_package_path}/brook
 svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/trojan-plus ${extra_package_path}/trojan-plus
 svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/ssocks ${extra_package_path}/ssocks
-svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/xray-core ${extra_package_path}/xray-core
+svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/openwrt-xray ${extra_package_path}/xray-core
 svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/v2ray-plugin ${extra_package_path}/v2ray-plugin
 svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/xray-plugin ${extra_package_path}/xray-plugin
 svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/hysteria ${extra_package_path}/hysteria
