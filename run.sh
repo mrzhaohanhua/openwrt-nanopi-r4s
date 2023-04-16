@@ -24,13 +24,15 @@ cd openwrt
 
 ### 更换关键文件 ###
 # 删除原target文件
+cp ./target/linux/rockchip/Makefile ./target_linux_rockchip_Makefile.bak
 rm -rf ./target/linux/rockchip
 # 下载lede的target文件
 svn export https://github.com/coolsnowwolf/lede/tags/$lede_tag_code/target/linux/rockchip target/linux/rockchip
 # 删除lede里的Makefile
 rm -rf ./target/linux/rockchip/Makefile
 # 使用原openwrt中的Makefile
-wget -P target/linux/rockchip/ https://github.com/openwrt/openwrt/raw/$openwrt_version_code/target/linux/rockchip/Makefile
+#wget -P target/linux/rockchip/ https://github.com/openwrt/openwrt/raw/$openwrt_version_code/target/linux/rockchip/Makefile
+mv ./target_linux_rockchip_Makefile.bak ./target/linux/rockchip/Makefile
 # openwrt使用5.10内核, 删除没有用到的PATCH
 rm -rf ./target/linux/rockchip/patches-5.4
 rm -rf ./target/linux/rockchip/patches-5.15
@@ -47,13 +49,24 @@ cp -rf ../PATCH/dts/* ./target/linux/rockchip/files/arch/arm64/boot/dts/rockchip
 # 删除原uboot
 rm -rf ./package/boot/uboot-rockchip
 # 使用lede的uboot
-svn export https://github.com/coolsnowwolf/lede/tags/$lede_tag_code/package/boot/uboot-rockchip package/boot/uboot-rockchip
-sed -i '/r2c-rk3328:arm-trusted/d' package/boot/uboot-rockchip/Makefile
+svn export https://github.com/coolsnowwolf/lede/tags/$lede_tag_code/package/boot/uboot-rockchip ./package/boot/uboot-rockchip
+# svn export https://github.com/coolsnowwolf/lede/trunk/package/boot/uboot-rockchip ./package/boot/uboot-rockchip
+# sed -i '/r2c-rk3328:arm-trusted/d' package/boot/uboot-rockchip/Makefile
 
-svn export https://github.com/coolsnowwolf/lede/tags/$lede_tag_code/package/boot/arm-trusted-firmware-rockchip-vendor package/boot/arm-trusted-firmware-rockchip-vendor
+# 删除原firmware
+rm -rf ./package/boot/arm-trusted-firmware-rockchip
+svn export https://github.com/coolsnowwolf/lede/tags/$lede_tag_code/package/boot/arm-trusted-firmware-rockchip ./package/boot/arm-trusted-firmware-rockchip
+#svn export https://github.com/coolsnowwolf/lede/trunk/package/boot/arm-trusted-firmware-rockchip ./package/boot/arm-trusted-firmware-rockchip
+
+svn export https://github.com/coolsnowwolf/lede/tags/$lede_tag_code/package/boot/arm-trusted-firmware-rockchip-vendor ./package/boot/arm-trusted-firmware-rockchip-vendor
+# svn export https://github.com/coolsnowwolf/lede/trunk/package/boot/arm-trusted-firmware-rockchip-vendor ./package/boot/arm-trusted-firmware-rockchip-vendor
 
 rm -rf ./package/kernel/linux/modules/video.mk
 wget -P package/kernel/linux/modules/ https://github.com/immortalwrt/immortalwrt/raw/master/package/kernel/linux/modules/video.mk
+
+# 更换tools/fakeroot
+rm -rf ./tools/fakeroot
+svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/tools/fakeroot ./tools/fakeroot
 
 # UPX 可执行软件压缩
 sed -i '/patchelf pkgconf/i\tools-y += ucl upx' ./tools/Makefile
