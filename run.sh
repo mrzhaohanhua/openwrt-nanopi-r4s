@@ -66,7 +66,8 @@ wget -P package/kernel/linux/modules/ https://github.com/immortalwrt/immortalwrt
 
 # 更换tools/fakeroot
 rm -rf ./tools/fakeroot
-svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/tools/fakeroot ./tools/fakeroot
+# svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/tools/fakeroot ./tools/fakeroot
+svn export https://github.com/openwrt/openwrt/trunk/tools/fakeroot ./tools/fakeroot
 
 # UPX 可执行软件压缩
 sed -i '/patchelf pkgconf/i\tools-y += ucl upx' ./tools/Makefile
@@ -114,7 +115,7 @@ svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/trojan-go ${ext
 svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/brook ${extra_package_path}/brook
 svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/trojan-plus ${extra_package_path}/trojan-plus
 svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/ssocks ${extra_package_path}/ssocks
-svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/openwrt-xray ${extra_package_path}/xray-core
+svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/xray-core ${extra_package_path}/xray-core
 svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/v2ray-plugin ${extra_package_path}/v2ray-plugin
 svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/xray-plugin ${extra_package_path}/xray-plugin
 svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/hysteria ${extra_package_path}/hysteria
@@ -122,7 +123,7 @@ svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/v2ray-core ${ex
 svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/v2ray-geodata ${extra_package_path}/v2ray-geodata
 
 # luci-app-xray
-svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/luci-app-xray ${extra_package_path}/luci-app-xray
+# svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/luci-app-xray ${extra_package_path}/luci-app-xray
 
 # KMS 激活助手
 svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/luci-app-vlmcsd ${extra_package_path}/luci-app-vlmcsd
