@@ -95,6 +95,9 @@ svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/chinadns-ng/ ${
 # OLED 驱动程序
 git clone -b master --depth 1 https://github.com/NateLol/luci-app-oled.git ${extra_package_path}/luci-app-oled
 
+# Passwall2
+svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/luci-app-passwall2 &{extra_package_path}/luci-app-passwall2
+
 # Passwall
 svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/luci-app-passwall ${extra_package_path}/luci-app-passwall
 # 修改luci-app-passwall中的Makefile以支持最新的iptables
@@ -106,6 +109,7 @@ svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/microsocks ${ex
 svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/dns2socks ${extra_package_path}/dns2socks
 svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/dns2tcp ${extra_package_path}/dns2tcp
 svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/naiveproxy ${extra_package_path}/naiveproxy
+svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/gn ${extra_package_path}/gn
 svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/pdnsd-alt ${extra_package_path}/pdnsd-alt
 svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/shadowsocks-rust ${extra_package_path}/shadowsocks-rust
 svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/shadowsocksr-libev ${extra_package_path}/shadowsocksr-libev
