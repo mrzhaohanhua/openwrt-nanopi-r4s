@@ -5,10 +5,10 @@ clear
 echo "清理 ./openwrt/"
 rm -rf openwrt
 
-openwrt_version_code="v22.03.4"
+openwrt_version_code="v22.03.5"
 lede_tag_code="20221001"
 
-extra_package_path="./package/extra/"
+extra_package_path="./package/extra"
 
 ### 获取openwrt ###
 git clone --depth 1 -b $openwrt_version_code https://github.com/openwrt/openwrt openwrt
