@@ -6,7 +6,7 @@ echo "清理 ./openwrt/"
 rm -rf openwrt
 
 openwrt_version_code="v22.03.5"
-lede_tag_code="20221001"
+lede_tag_code="20230609"
 
 extra_package_path="./package/extra"
 
@@ -23,28 +23,28 @@ cd openwrt
 ./scripts/feeds install -a
 
 ### 更换关键文件 ###
+# 备份原target文件
+# cp ./target/linux/rockchip/Makefile ./target_linux_rockchip_Makefile.bak
 # 删除原target文件
-cp ./target/linux/rockchip/Makefile ./target_linux_rockchip_Makefile.bak
 rm -rf ./target/linux/rockchip
 # 下载lede的target文件
 svn export https://github.com/coolsnowwolf/lede/tags/$lede_tag_code/target/linux/rockchip target/linux/rockchip
 # 删除lede里的Makefile
-rm -rf ./target/linux/rockchip/Makefile
+# rm -rf ./target/linux/rockchip/Makefile
 # 使用原openwrt中的Makefile
-#wget -P target/linux/rockchip/ https://github.com/openwrt/openwrt/raw/$openwrt_version_code/target/linux/rockchip/Makefile
-mv ./target_linux_rockchip_Makefile.bak ./target/linux/rockchip/Makefile
+# mv ./target_linux_rockchip_Makefile.bak ./target/linux/rockchip/Makefile
 # openwrt使用5.10内核, 删除没有用到的PATCH
-rm -rf ./target/linux/rockchip/patches-5.4
-rm -rf ./target/linux/rockchip/patches-5.15
-rm -rf ./target/linux/rockchip/patches-5.19
-rm -rf ./target/linux/rockchip/files-5.19
-rm -rf ./target/linux/rockchip/files-5.15
-rm ./target/linux/rockchip/modules.mk
+# rm -rf ./target/linux/rockchip/patches-5.4
+# rm -rf ./target/linux/rockchip/patches-5.15
+# rm -rf ./target/linux/rockchip/patches-5.19
+# rm -rf ./target/linux/rockchip/files-5.19
+# rm -rf ./target/linux/rockchip/files-5.15
+# rm ./target/linux/rockchip/modules.mk
 # patches-5.10中002和003patch会编译失败, 在此删除
-rm -rf ./target/linux/rockchip/patches-5.10/002-net-usb-r8152-add-LED-configuration-from-OF.patch 
-rm -rf ./target/linux/rockchip/patches-5.10/003-dt-bindings-net-add-RTL8152-binding-documentation.patch
+# rm -rf ./target/linux/rockchip/patches-5.10/002-net-usb-r8152-add-LED-configuration-from-OF.patch 
+# rm -rf ./target/linux/rockchip/patches-5.10/003-dt-bindings-net-add-RTL8152-binding-documentation.patch
 # 使用QiuSimons的YAOF中的dts文件
-cp -rf ../PATCH/dts/* ./target/linux/rockchip/files/arch/arm64/boot/dts/rockchip/
+# cp -rf ../PATCH/dts/* ./target/linux/rockchip/files/arch/arm64/boot/dts/rockchip/
 
 # 删除原uboot
 rm -rf ./package/boot/uboot-rockchip
@@ -96,7 +96,7 @@ svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/chinadns-ng/ ${
 git clone -b master --depth 1 https://github.com/NateLol/luci-app-oled.git ${extra_package_path}/luci-app-oled
 
 # Passwall2
-svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/luci-app-passwall2 &{extra_package_path}/luci-app-passwall2
+# svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/luci-app-passwall2 &{extra_package_path}/luci-app-passwall2
 
 # Passwall
 svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/luci-app-passwall ${extra_package_path}/luci-app-passwall
