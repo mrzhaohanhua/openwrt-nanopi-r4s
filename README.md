@@ -12,7 +12,7 @@ QiuSimons对R4S进行了超频，这里没有采用，以降低对电源的要�
 
 ```BASH
 git clone https://github.com/mrzhaohanhua/openwrt-nanopi-r4s
-cd openwrt-r4s
+cd openwrt-nanopi-r4s
 sh run.sh
 cd openwrt
 make menuconfig     #根据自己的需求进行配置
