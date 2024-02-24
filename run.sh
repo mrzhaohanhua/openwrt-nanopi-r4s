@@ -1,5 +1,13 @@
 #!/bin/bash
 
+#定义变量
+openwrt_version_code="v23.05.2"
+lede_version_code="20230609"
+openwrt_repo="https://github.com/openwrt/openwrt"
+lede_repo="https://github.com/coolsnowwolf/lede"
+my_package_repo="https://github.com/mrzhaohanhua/openwrt-package"
+extra_package_path="./package/extra"
+
 # 定义函数
 checkout_code(){
     repo_url=$1
@@ -25,21 +33,29 @@ checkout_code(){
     fi
 }
 
-
-openwrt_version_code="v23.05.0"
-lede_version_code="20230609"
-openwrt_repo="https://github.com/openwrt/openwrt"
-lede_repo="https://github.com/coolsnowwolf/lede"
-
-my_package_repo="https://github.com/mrzhaohanhua/openwrt-package"
-
-extra_package_path="./package/extra"
+copy_package(){
+  source_dir=$1
+  dest_dir=$2
+  mkdir -p $dest_dir
+  cp -rf ../openwrt-package/$source_dir/* $dest_dir/
+      if [ $? -ne 0 ]; then
+        echo "cp -rf ../openwrt-package/$source_dir $dest_dir"
+        echo "执行错误"
+        exit 1
+    fi
+}
 
 ### 清理 ###
 echo "清理 ./openwrt/"
 rm -rf openwrt
+echo "清理 ./openwrt-package/"
+rm -rf openwrt-package
 
+echo "签出 OpenWRT $openwrt_version_code"
 git clone --depth 1 -b $openwrt_version_code $openwrt_repo openwrt
+
+echo "签出 openwrt-package"
+git clone --depth 1 $my_package_repo openwrt-package
 
 cd openwrt
 
@@ -55,100 +71,62 @@ sed -i 's,-SNAPSHOT,,g' package/base-files/image-config.in
 # UPX 可执行软件压缩
 sed -i '/patchelf pkgconf/i\tools-y += ucl upx' ./tools/Makefile
 sed -i '\/autoconf\/compile :=/i\$(curdir)/upx/compile := $(curdir)/ucl/compile' ./tools/Makefile
-# svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/tools/ucl tools/ucl
-# svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/tools/upx tools/upx
-checkout_code ${my_package_repo} tools/ucl tools/ucl
-checkout_code ${my_package_repo} tools/upx tools/upx
+copy_package tools/ucl tools/ucl
+copy_package tools/upx tools/upx
 
 ### 获取额外的 LuCI 应用、主题和依赖 ###
 
 # 更换smartdns
 rm -rf feeds/packages/net/smartdns
-# svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/openwrt-smartdns/ feeds/packages/net/smartdns
-checkout_code ${my_package_repo} openwrt-smartdns feeds/packages/net/smartdns
+copy_package openwrt-smartdns feeds/packages/net/smartdns
 
 # 替换luci-app-smartdns
 rm -rf feeds/luci/applications/luci-app-smartdns
-# svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/luci-app-smartdns/ feeds/luci/applications/luci-app-smartdns
-checkout_code ${my_package_repo} luci-app-smartdns feeds/luci/applications/luci-app-smartdns
+copy_package luci-app-smartdns feeds/luci/applications/luci-app-smartdns
 
 # Argon主题
-# svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/luci-theme-argon/ ${extra_package_path}/luci-theme-argon
-# svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/luci-app-argon-config/ ${extra_package_path}/luci-app-argon-config
-checkout_code ${my_package_repo} luci-theme-argon ${extra_package_path}/luci-theme-argon
-checkout_code ${my_package_repo} luci-app-argon-config ${extra_package_path}/luci-app-argon-config
+copy_package luci-theme-argon ${extra_package_path}/luci-theme-argon
+copy_package luci-app-argon-config ${extra_package_path}/luci-app-argon-config
 
 # ChinaDNS
-# svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/chinadns-ng/ ${extra_package_path}/chinadns-ng
-checkout_code ${my_package_repo} chinadns-ng ${extra_package_path}/chinadns-ng
+copy_package chinadns-ng ${extra_package_path}/chinadns-ng
 
 # OLED 驱动程序
 git clone -b master --depth 1 https://github.com/NateLol/luci-app-oled.git ${extra_package_path}/luci-app-oled
 
-# Passwall2
-# svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/luci-app-passwall2 &{extra_package_path}/luci-app-passwall2
-
 # Passwall
-# svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/luci-app-passwall ${extra_package_path}/luci-app-passwall
-checkout_code ${my_package_repo} luci-app-passwall ${extra_package_path}/luci-app-passwall
+copy_package luci-app-passwall ${extra_package_path}/luci-app-passwall
 
 # 修改luci-app-passwall中的Makefile以支持最新的iptables
 sed -i 's,iptables-legacy,iptables-nft,g' ${extra_package_path}/luci-app-passwall/Makefile
 
 # Passwall的依赖包
-# svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/ipt2socks ${extra_package_path}/ipt2socks
-# svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/microsocks ${extra_package_path}/microsocks
-# svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/dns2socks ${extra_package_path}/dns2socks
-# svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/dns2tcp ${extra_package_path}/dns2tcp
-# svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/naiveproxy ${extra_package_path}/naiveproxy
-# svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/gn ${extra_package_path}/gn
-# svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/pdnsd-alt ${extra_package_path}/pdnsd-alt
-# svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/shadowsocks-rust ${extra_package_path}/shadowsocks-rust
-# svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/shadowsocksr-libev ${extra_package_path}/shadowsocksr-libev
-# svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/simple-obfs ${extra_package_path}/simple-obfs
-# svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/tcping ${extra_package_path}/tcping
-# svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/trojan-go ${extra_package_path}/trojan-go
-# svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/brook ${extra_package_path}/brook
-# svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/trojan-plus ${extra_package_path}/trojan-plus
-# svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/ssocks ${extra_package_path}/ssocks
-# svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/xray-core ${extra_package_path}/xray-core
-# svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/v2ray-plugin ${extra_package_path}/v2ray-plugin
-# svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/xray-plugin ${extra_package_path}/xray-plugin
-# svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/hysteria ${extra_package_path}/hysteria
-# svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/v2ray-core ${extra_package_path}/v2ray-core
-# svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/v2ray-geodata ${extra_package_path}/v2ray-geodata
-# svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/tuic-client ${extra_package_path}/tuic-client
-checkout_code ${my_package_repo}  ipt2socks ${extra_package_path}/ipt2socks
-checkout_code ${my_package_repo}  microsocks ${extra_package_path}/microsocks
-checkout_code ${my_package_repo}  dns2socks ${extra_package_path}/dns2socks
-checkout_code ${my_package_repo}  dns2tcp ${extra_package_path}/dns2tcp
-checkout_code ${my_package_repo}  naiveproxy ${extra_package_path}/naiveproxy
-checkout_code ${my_package_repo}  gn ${extra_package_path}/gn
-checkout_code ${my_package_repo}  pdnsd-alt ${extra_package_path}/pdnsd-alt
-checkout_code ${my_package_repo}  shadowsocks-rust ${extra_package_path}/shadowsocks-rust
-checkout_code ${my_package_repo}  shadowsocksr-libev ${extra_package_path}/shadowsocksr-libev
-checkout_code ${my_package_repo}  simple-obfs ${extra_package_path}/simple-obfs
-checkout_code ${my_package_repo}  tcping ${extra_package_path}/tcping
-checkout_code ${my_package_repo}  trojan-go ${extra_package_path}/trojan-go
-checkout_code ${my_package_repo}  brook ${extra_package_path}/brook
-checkout_code ${my_package_repo}  trojan-plus ${extra_package_path}/trojan-plus
-checkout_code ${my_package_repo}  ssocks ${extra_package_path}/ssocks
-checkout_code ${my_package_repo}  xray-core ${extra_package_path}/xray-core
-checkout_code ${my_package_repo}  v2ray-plugin ${extra_package_path}/v2ray-plugin
-checkout_code ${my_package_repo}  xray-plugin ${extra_package_path}/xray-plugin
-checkout_code ${my_package_repo}  hysteria ${extra_package_path}/hysteria
-checkout_code ${my_package_repo}  v2ray-core ${extra_package_path}/v2ray-core
-checkout_code ${my_package_repo}  v2ray-geodata ${extra_package_path}/v2ray-geodata
-checkout_code ${my_package_repo}  tuic-client ${extra_package_path}/tuic-client
-
-# luci-app-xray
-# svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/luci-app-xray ${extra_package_path}/luci-app-xray
+copy_package ipt2socks ${extra_package_path}/ipt2socks
+copy_package microsocks ${extra_package_path}/microsocks
+copy_package dns2socks ${extra_package_path}/dns2socks
+copy_package dns2tcp ${extra_package_path}/dns2tcp
+copy_package naiveproxy ${extra_package_path}/naiveproxy
+copy_package gn ${extra_package_path}/gn
+copy_package pdnsd-alt ${extra_package_path}/pdnsd-alt
+copy_package shadowsocks-rust ${extra_package_path}/shadowsocks-rust
+copy_package shadowsocksr-libev ${extra_package_path}/shadowsocksr-libev
+copy_package simple-obfs ${extra_package_path}/simple-obfs
+copy_package tcping ${extra_package_path}/tcping
+copy_package trojan-go ${extra_package_path}/trojan-go
+copy_package brook ${extra_package_path}/brook
+copy_package trojan-plus ${extra_package_path}/trojan-plus
+copy_package ssocks ${extra_package_path}/ssocks
+copy_package xray-core ${extra_package_path}/xray-core
+copy_package v2ray-plugin ${extra_package_path}/v2ray-plugin
+copy_package xray-plugin ${extra_package_path}/xray-plugin
+copy_package hysteria ${extra_package_path}/hysteria
+copy_package v2ray-core ${extra_package_path}/v2ray-core
+copy_package v2ray-geodata ${extra_package_path}/v2ray-geodata
+copy_package tuic-client ${extra_package_path}/tuic-client
 
 # KMS 激活助手
-# svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/luci-app-vlmcsd ${extra_package_path}/luci-app-vlmcsd
-# svn export https://github.com/mrzhaohanhua/openwrt-package/trunk/vlmcsd ${extra_package_path}/vlmcsd
-checkout_code ${my_package_repo}  luci-app-vlmcsd ${extra_package_path}/luci-app-vlmcsd
-checkout_code ${my_package_repo}  vlmcsd ${extra_package_path}/vlmcsd
+copy_package luci-app-vlmcsd ${extra_package_path}/luci-app-vlmcsd
+copy_package vlmcsd ${extra_package_path}/vlmcsd
 
 ### 后续修改 ###
 
