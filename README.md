@@ -2,7 +2,7 @@
 
 基于OpenWrt官方代码
 
-除了OpenWrt官方代码外，增加了passwall、kms激活助手等功能。
+增加了passwall、kms激活助手等功能。
 
 ```BASH
 git clone https://github.com/mrzhaohanhua/openwrt-nanopi-r4s
