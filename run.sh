@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #定义变量
-openwrt_version_code="v23.05.2"
+openwrt_version_code="v23.05.5"
 lede_version_code="20230609"
 openwrt_repo="https://github.com/openwrt/openwrt"
 lede_repo="https://github.com/coolsnowwolf/lede"
@@ -83,6 +83,10 @@ copy_package openwrt-smartdns feeds/packages/net/smartdns
 # 替换luci-app-smartdns
 rm -rf feeds/luci/applications/luci-app-smartdns
 copy_package luci-app-smartdns feeds/luci/applications/luci-app-smartdns
+
+# 替换golang为v1.23
+rm -rf feeds/packages/lang/golang/golang
+copy_package golang feeds/packages/lang/golang/golang
 
 # Argon主题
 copy_package luci-theme-argon ${extra_package_path}/luci-theme-argon
