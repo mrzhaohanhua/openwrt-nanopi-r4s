@@ -2,9 +2,9 @@
 
 #定义变量
 openwrt_version_code="v23.05.5"
-lede_version_code="20230609"
+immortalwrt_version_code="v23.05.4"
 openwrt_repo="https://github.com/openwrt/openwrt"
-lede_repo="https://github.com/coolsnowwolf/lede"
+immortalwrt_repo="https://github.com/immortalwrt/immortalwrt"
 my_package_repo="https://github.com/mrzhaohanhua/openwrt-packages"
 extra_package_path="./package/extra"
 
@@ -24,16 +24,25 @@ copy_package(){
 ### 清理 ###
 echo "清理 ./openwrt/"
 rm -rf openwrt
+echo "清理 ./immortalwrt/"
+rm -rf immortalwrt
 echo "清理 ./openwrt-packages/"
 rm -rf openwrt-packages
 
 echo "签出 OpenWRT $openwrt_version_code"
-
 if git clone --depth 1 -b $openwrt_version_code $openwrt_repo openwrt; then
 	echo "签出 OpenWRT $openwrt_version_code 成功."
 else
 	echo "签出 OpenWRT $openwrt_version_code 失败."
 	exit 1
+fi
+
+echo "签出 immortalWRT $immortalwrt_version_code"
+if git clone --depth 1 -b $immortalwrt_version_code $immortalwrt_repo immortalwrt; then
+  echo "签出 immortalWRT $immortal_version_code 成功."
+else
+  echo "签出 immortalWRT $immortal_version_code 失败."
+  exit 1
 fi
 
 echo "签出 openwrt-packages"
@@ -43,6 +52,15 @@ else
 	echo "签出 openwrt-packages 失败."
 	exit 1
 fi
+
+echo "更换 rockchip 内核文件."
+rm -rf openwrt/target/linux/rockchip
+rm -rf openwrt/package/boot/arm-trusted-firmware-rockchip
+rm -rf openwrt/package/boot/uboot-rockchip
+
+cp -r immortalwrt/target/linux/rockchip openwrt/target/linux/
+cp -r immortalwrt/package/boot/arm-trusted-firmware-rockchip openwrt/package/boot/
+cp -r immortalwrt/package/boot/uboot-rockchip openwrt/package/boot/
 
 cd openwrt
 
